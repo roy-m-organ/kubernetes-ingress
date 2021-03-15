@@ -605,7 +605,6 @@ func (lbc *LoadBalancerController) createExtendedResources(resources []Resource)
 		case *TransportServerConfiguration:
 			tsEx := lbc.createTransportServerEx(impl.TransportServer, impl.ListenerPort)
 			result.TransportServerExes = append(result.TransportServerExes, tsEx)
-
 		}
 	}
 
@@ -636,7 +635,7 @@ func (lbc *LoadBalancerController) syncConfigMap(task task) {
 
 	resourceExes := lbc.createExtendedResources(resources)
 
-	warnings, updateErr := lbc.configurator.UpdateConfig(cfgParams, resourceExes.IngressExes, resourceExes.MergeableIngresses, resourceExes.VirtualServerExes)
+	warnings, updateErr := lbc.configurator.UpdateConfig(cfgParams, resourceExes.IngressExes, resourceExes.MergeableIngresses, resourceExes.VirtualServerExes, resourceExes.TransportServerExes)
 
 	eventTitle := "Updated"
 	eventType := api_v1.EventTypeNormal

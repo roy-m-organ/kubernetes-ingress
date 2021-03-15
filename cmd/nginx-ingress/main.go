@@ -525,7 +525,7 @@ func main() {
 		EnablePreviewPolicies:          *enablePreviewPolicies,
 	}
 
-	ngxConfig := configs.GenerateNginxMainConfig(staticCfgParams, cfgParams)
+	ngxConfig := configs.GenerateNginxMainConfig(staticCfgParams, cfgParams, []string{})
 	content, err := templateExecutor.ExecuteMainConfigTemplate(ngxConfig)
 	if err != nil {
 		glog.Fatalf("Error generating NGINX main config: %v", err)
