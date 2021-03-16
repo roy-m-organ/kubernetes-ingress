@@ -34,7 +34,7 @@ Run the tests:
     $ make build
     $ make run-tests NODE_IP=$(minikube ip)
     ```
-The tests will use the Ingress Controller for NGINX with the default *nginx/nginx-ingress:edge* image. See the section below to learn how to configure the tests including the image and the type of NGINX -- NGINX or NGINX Plus.
+The tests will use the Ingress Controller for NGINX with the default *nginx/nginx-ingress:1.11.0* image. See the section below to learn how to configure the tests including the image and the type of NGINX -- NGINX or NGINX Plus.
 
 ## Configuring the Tests
 

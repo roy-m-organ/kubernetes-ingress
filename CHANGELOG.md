@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.11.0
+ 
+A list of changes can be found on Github at: [1.11 Release](https://github.com/nginxinc/kubernetes-ingress/releases/tag/v1.11.0)
+
 ### 1.10.0
 
 OVERVIEW:
