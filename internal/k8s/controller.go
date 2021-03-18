@@ -635,7 +635,7 @@ func (lbc *LoadBalancerController) syncConfigMap(task task) {
 
 	resourceExes := lbc.createExtendedResources(resources)
 
-	warnings, updateErr := lbc.configurator.UpdateConfig(cfgParams, resourceExes.IngressExes, resourceExes.MergeableIngresses, resourceExes.VirtualServerExes, resourceExes.TransportServerExes)
+	warnings, updateErr := lbc.configurator.UpdateConfig(cfgParams, resourceExes.IngressExes, resourceExes.MergeableIngresses, resourceExes.VirtualServerExes)
 
 	eventTitle := "Updated"
 	eventType := api_v1.EventTypeNormal

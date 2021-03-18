@@ -497,7 +497,7 @@ func ParseConfigMap(cfgm *v1.ConfigMap, nginxPlus bool, hasAppProtect bool) *Con
 }
 
 // GenerateNginxMainConfig generates MainConfig.
-func GenerateNginxMainConfig(staticCfgParams *StaticConfigParams, config *ConfigParams, transportServerStreamSnippets []string) *version1.MainConfig {
+func GenerateNginxMainConfig(staticCfgParams *StaticConfigParams, config *ConfigParams) *version1.MainConfig {
 	nginxCfg := &version1.MainConfig{
 		AccessLogOff:                       config.MainAccessLogOff,
 		DefaultServerAccessLogOff:          config.DefaultServerAccessLogOff,
@@ -555,9 +555,6 @@ func GenerateNginxMainConfig(staticCfgParams *StaticConfigParams, config *Config
 		InternalRouteServerName:            staticCfgParams.PodName,
 		LatencyMetrics:                     staticCfgParams.EnableLatencyMetrics,
 		PreviewPolicies:                    staticCfgParams.EnablePreviewPolicies,
-	}
-	if len(transportServerStreamSnippets) > 0 {
-		nginxCfg.MainSnippets = append(nginxCfg.MainSnippets, transportServerStreamSnippets...)
 	}
 	return nginxCfg
 }

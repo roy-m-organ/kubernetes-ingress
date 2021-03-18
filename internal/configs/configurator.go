@@ -582,14 +582,6 @@ func (cnf *Configurator) addOrUpdateTransportServer(transportServerEx *Transport
 		return cnf.updateTLSPassthroughHostsConfig()
 	}
 
-	// this replaces existing stream snippets, if there are multiple transport servers, they will be overwritten!!
-	mainCfg := GenerateNginxMainConfig(cnf.staticCfgParams, cnf.cfgParams, []string{transportServerEx.TransportServer.Spec.StreamSnippets})
-	mainCfgContent, err := cnf.templateExecutor.ExecuteMainConfigTemplate(mainCfg)
-	if err != nil {
-		return fmt.Errorf("Error when writing main Config")
-	}
-	cnf.nginxManager.CreateMainConfig(mainCfgContent)
-
 	return nil
 }
 
@@ -786,8 +778,6 @@ func (cnf *Configurator) deleteTransportServer(key string) error {
 
 		return cnf.updateTLSPassthroughHostsConfig()
 	}
-
-	// delete stream snippets here ?
 
 	return nil
 }
@@ -1007,7 +997,7 @@ func (cnf *Configurator) updatePlusEndpoints(ingEx *IngressEx) error {
 }
 
 // UpdateConfig updates NGINX configuration parameters.
-func (cnf *Configurator) UpdateConfig(cfgParams *ConfigParams, ingExes []*IngressEx, mergeableIngs []*MergeableIngresses, virtualServerExes []*VirtualServerEx, transportServerExes []*TransportServerEx) (Warnings, error) {
+func (cnf *Configurator) UpdateConfig(cfgParams *ConfigParams, ingExes []*IngressEx, mergeableIngs []*MergeableIngresses, virtualServerExes []*VirtualServerEx) (Warnings, error) {
 	cnf.cfgParams = cfgParams
 	allWarnings := newWarnings()
 
@@ -1040,12 +1030,7 @@ func (cnf *Configurator) UpdateConfig(cfgParams *ConfigParams, ingExes []*Ingres
 		}
 	}
 
-	var additionalStreamSnippets []string
-	for _, v := range transportServerExes {
-		additionalStreamSnippets = append(additionalStreamSnippets, v.TransportServer.Spec.StreamSnippets)
-	}
-
-	mainCfg := GenerateNginxMainConfig(cnf.staticCfgParams, cfgParams, additionalStreamSnippets)
+	mainCfg := GenerateNginxMainConfig(cnf.staticCfgParams, cfgParams)
 	mainCfgContent, err := cnf.templateExecutor.ExecuteMainConfigTemplate(mainCfg)
 	if err != nil {
 		return allWarnings, fmt.Errorf("Error when writing main Config")
@@ -1463,7 +1448,7 @@ func (cnf *Configurator) RefreshAppProtectUserSigs(
 func (cnf *Configurator) AddInternalRouteConfig() error {
 	cnf.staticCfgParams.EnableInternalRoutes = true
 	cnf.staticCfgParams.PodName = os.Getenv("POD_NAME")
-	mainCfg := GenerateNginxMainConfig(cnf.staticCfgParams, cnf.cfgParams, []string{})
+	mainCfg := GenerateNginxMainConfig(cnf.staticCfgParams, cnf.cfgParams)
 	mainCfgContent, err := cnf.templateExecutor.ExecuteMainConfigTemplate(mainCfg)
 	if err != nil {
 		return fmt.Errorf("Error when writing main Config: %v", err)
