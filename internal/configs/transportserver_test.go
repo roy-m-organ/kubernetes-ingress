@@ -84,6 +84,7 @@ func TestGenerateTransportServerConfigForTCPSnippets(t *testing.T) {
 					Pass: "tcp-app",
 				},
 				ServerSnippets: "deny  192.168.1.1;\nallow 192.168.1.0/24;",
+				StreamSnippets: "limit_conn_zone $binary_remote_addr zone=addr:10m;",
 			},
 		},
 		Endpoints: map[string][]string{
@@ -129,6 +130,7 @@ func TestGenerateTransportServerConfigForTCPSnippets(t *testing.T) {
 			HealthCheck:              nil,
 			ServerSnippets:           []string{"deny  192.168.1.1;", "allow 192.168.1.0/24;"},
 		},
+		StreamSnippets: []string{"limit_conn_zone $binary_remote_addr zone=addr:10m;"},
 	}
 
 	result := generateTransportServerConfig(&transportServerEx, listenerPort, true)
@@ -213,6 +215,7 @@ func TestGenerateTransportServerConfigForTCP(t *testing.T) {
 			HealthCheck:              nil,
 			ServerSnippets:           []string{},
 		},
+		StreamSnippets: []string{},
 	}
 
 	result := generateTransportServerConfig(&transportServerEx, listenerPort, true)
@@ -298,6 +301,7 @@ func TestGenerateTransportServerConfigForTLSPasstrhough(t *testing.T) {
 			HealthCheck:              nil,
 			ServerSnippets:           []string{},
 		},
+		StreamSnippets: []string{},
 	}
 
 	result := generateTransportServerConfig(&transportServerEx, listenerPort, true)
@@ -387,6 +391,7 @@ func TestGenerateTransportServerConfigForUDP(t *testing.T) {
 			HealthCheck:              nil,
 			ServerSnippets:           []string{},
 		},
+		StreamSnippets: []string{},
 	}
 
 	result := generateTransportServerConfig(&transportServerEx, listenerPort, true)

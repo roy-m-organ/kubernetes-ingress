@@ -2,8 +2,9 @@ package version2
 
 // TransportServerConfig holds NGINX configuration for a TransportServer.
 type TransportServerConfig struct {
-	Server    StreamServer
-	Upstreams []StreamUpstream
+	Server         StreamServer
+	Upstreams      []StreamUpstream
+	StreamSnippets []string
 }
 
 // StreamUpstream defines a stream upstream.
@@ -39,7 +40,6 @@ type StreamServer struct {
 	ProxyNextUpstreamTries   int
 	HealthCheck              *StreamHealthCheck
 	ServerSnippets           []string
-	StreamSnippets           []string
 }
 
 // StreamHealthCheck defines a health check for a StreamUpstream in a StreamServer.

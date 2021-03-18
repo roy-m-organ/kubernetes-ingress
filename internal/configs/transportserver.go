@@ -87,9 +87,9 @@ func generateTransportServerConfig(transportServerEx *TransportServerEx, listene
 			ProxyNextUpstreamTries:   nextUpstreamTries,
 			HealthCheck:              healthCheck,
 			ServerSnippets:           serverSnippets,
-			StreamSnippets:           streamSnippets,
 		},
-		Upstreams: upstreams,
+		Upstreams:      upstreams,
+		StreamSnippets: streamSnippets,
 	}
 
 	return tsConfig

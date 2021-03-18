@@ -32,7 +32,7 @@ server {
     proxy_responses {{ $s.ProxyResponses }};
     {{ end }}
 
-    {{ range $snippet := $s.Snippets }}
+    {{ range $snippet := $s.ServerSnippets }}
     {{- $snippet }}
     {{ end }}
 
