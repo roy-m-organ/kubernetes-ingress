@@ -127,7 +127,7 @@ func TestGenerateTransportServerConfigForTCPSnippets(t *testing.T) {
 			ProxyNextUpstreamTimeout: "0s",
 			ProxyTimeout:             "10m",
 			HealthCheck:              nil,
-			Snippets:                 []string{"deny  192.168.1.1;", "allow 192.168.1.0/24;"},
+			ServerSnippets:           []string{"deny  192.168.1.1;", "allow 192.168.1.0/24;"},
 		},
 	}
 
@@ -211,7 +211,7 @@ func TestGenerateTransportServerConfigForTCP(t *testing.T) {
 			ProxyNextUpstreamTimeout: "0s",
 			ProxyTimeout:             "50s",
 			HealthCheck:              nil,
-			Snippets:                 []string{},
+			ServerSnippets:           []string{},
 		},
 	}
 
@@ -296,7 +296,7 @@ func TestGenerateTransportServerConfigForTLSPasstrhough(t *testing.T) {
 			ProxyNextUpstreamTries:   0,
 			ProxyTimeout:             "10m",
 			HealthCheck:              nil,
-			Snippets:                 []string{},
+			ServerSnippets:           []string{},
 		},
 	}
 
@@ -385,7 +385,7 @@ func TestGenerateTransportServerConfigForUDP(t *testing.T) {
 			ProxyNextUpstreamTries:   0,
 			ProxyTimeout:             "10m",
 			HealthCheck:              nil,
-			Snippets:                 []string{},
+			ServerSnippets:           []string{},
 		},
 	}
 

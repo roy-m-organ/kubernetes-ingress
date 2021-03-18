@@ -38,7 +38,8 @@ type StreamServer struct {
 	ProxyNextUpstreamTimeout string
 	ProxyNextUpstreamTries   int
 	HealthCheck              *StreamHealthCheck
-	Snippets                 []string
+	ServerSnippets           []string
+	StreamSnippets           []string
 }
 
 // StreamHealthCheck defines a health check for a StreamUpstream in a StreamServer.

@@ -10,6 +10,10 @@ upstream {{ $u.Name }} {
 }
 {{ end }}
 
+{{ range $snippet := .StreamSnippets }}
+{{- $snippet }}
+{{ end }}
+
 {{ $s := .Server }}
 server {
     {{ if $s.TLSPassthrough }}
